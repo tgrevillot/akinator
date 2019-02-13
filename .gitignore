@@ -3,3 +3,4 @@
 .classpath
 .settings
 .cache-main
+.cache-tests
