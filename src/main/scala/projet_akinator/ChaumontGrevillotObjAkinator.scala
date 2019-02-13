@@ -13,5 +13,9 @@ object ChaumontGrevillotObjAkinator {
           Question("Est-ce qu'il a des poils ?",
           Animal("Chauve-souris"), Animal("Ptérodactyle"))),
           Question("Est-ce qu'il ronronne ?",
-          Animal("Chat"), Animal("Chien")))   
+          Animal("Chat"), Animal("Chien")));
+          
+  /* Question 1 */
+  
+  
 }
