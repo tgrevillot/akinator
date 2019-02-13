@@ -41,6 +41,28 @@ object ChaumontGrevillotObjAkinator {
     }
   }
   
+  /* Question 3 */
+  
+  def jeuLog(a: ABanimal, it: Iterator[String]): List[String] = a match {
+    case Question(q, oui, non) => {
+      println(q)
+      if(it.next() == "o")
+        "o"::jeuLog(oui, it)
+      else
+        "n"::jeuLog(non, it)
+    }
+    case Animal(nom) => {
+      println("Pensez-vous à : " + nom + " ?")
+      if(it.next() == "o") {
+        println("J'ai gagné")
+        "o"::Nil
+      } else {
+        println("J'ai perdu")
+        "n"::Nil
+      }
+    }
+  }
+  
   def main(args: Array[String]): Unit = {
     jeuSimple(a, Source.stdin.getLines)
   }
