@@ -22,4 +22,13 @@ class TestChaumontGrevillot extends FunSuite {
   test("jeuSimple mauvaise reponse") {
     assert(jeuSimple(a, Iterator("n", "n", "n")) === false)
   }
+  
+  //Question 3 :
+  test("jeuLog bonne réponse") {
+    assert(jeuLog(a, Iterator("o", "o", "o", "o")) === List("o", "o", "o", "o"))
+  }
+  
+  test("jeuLog reponse aleatoire") {
+    assert(jeuLog(a, Iterator("n", "n", "n")) === List("n", "n", "n"))
+  }
 }
