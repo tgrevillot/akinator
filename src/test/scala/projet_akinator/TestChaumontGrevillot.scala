@@ -15,6 +15,9 @@ class TestChaumontGrevillot extends FunSuite {
           Question("Est-ce qu'il ronronne ?",
           Animal("Chat"), Animal("Chien")));
   
+  
+  /* Question 1 */
+  
   test("jeuSimple bonne reponse") {
     assert(jeuSimple(a, Iterator("o", "o", "o", "o")) === true)
   }
@@ -23,7 +26,8 @@ class TestChaumontGrevillot extends FunSuite {
     assert(jeuSimple(a, Iterator("n", "n", "n")) === false)
   }
   
-  //Question 3 :
+  
+  /* Question 3 */
   test("jeuLog bonne réponse") {
     assert(jeuLog(a, Iterator("o", "o", "o", "o")) === List("o", "o", "o", "o"))
   }
