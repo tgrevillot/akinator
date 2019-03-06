@@ -4,7 +4,7 @@ import org.scalatest._
 
 class TestChaumontGrevillot extends FunSuite {
   
-  import ChaumontGrevillotObjAkinator._
+  import ChaumontGrevillot._
   
   val a = Question("Est-ce qu'il a des ailes ?",
           Question("Est-ce qu'il a des plumes ?",

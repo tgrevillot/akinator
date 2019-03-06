@@ -3,7 +3,7 @@ package projet_akinator
 import scala.io._
 import java.io._
 
-object ChaumontGrevillotObjAkinator {
+object ChaumontGrevillot {
   
   trait ABanimal
   case class Animal(nom: String) extends ABanimal
@@ -59,6 +59,24 @@ object ChaumontGrevillotObjAkinator {
       } else {
         println("J'ai perdu")
         "n"::Nil
+      }
+    }
+  }
+  
+  /* Question 4 */
+  
+  def jeuApprentissage(a: ABanimal, it: Iterator[String]): List[String] = a match {
+    case Question(q, oui, non) => {
+      println(q)
+      if(it.next() == "o") jeuLog(oui, it)
+      else jeuLog(non, it)
+    }
+    case Animal(nom) => {
+      println("Pensez-vous à : " + nom + " ?")
+      if(it.next() == "o") {
+        println("J'ai gagné!")
+      } else {
+        println("J'ai perdu, quelle était la bonne réponse ?")
       }
     }
   }
