@@ -17,15 +17,6 @@ object ChaumontGrevillot {
           Animal("Chauve-souris"), Animal("Ptérodactyle"))),
           Question("Est-ce qu'il ronronne ?",
           Animal("Chat"), Animal("Chien")));
-  
-  val apprentissage = Question("Est-ce qu'il a des ailes ?",
-                      Question("Est-ce qu'il a des plumes ?",
-                      Question("Est-ce qu'il a un goitre ?",
-                      Animal("Pélican"), Animal("Pigeon")),
-                      Question("Est-ce qu'il a des poils ?",
-                      Animal("Chauve-souris"), Animal("Ptérodactyle"))),
-                      Question("Est-ce qu'il ronronne ?",
-                      Animal("Chat"), Animal("Chien")));
           
   /* Question 1 & 2 */
   
@@ -77,8 +68,10 @@ object ChaumontGrevillot {
   def jeuApprentissage(a: ABanimal, it: Iterator[String]): ABanimal = a match {
     case Question(q, oui, non) => {
       println(q)
-      if(it.next().equals("o")) jeuApprentissage(oui, it)
-      else jeuApprentissage(non, it)
+      if(it.next().equals("o")) 
+        Question(q, jeuApprentissage(oui, it), non)
+      else 
+        Question(q, oui, jeuApprentissage(non, it))
     }
     case Animal(nom) => {
       println("Pensez-vous à : " + nom + " ?")
@@ -91,8 +84,7 @@ object ChaumontGrevillot {
         println("Quelle question permet de différencier \"" + nom + "\" et \"" + reponseAttendue + "\"")
         val nouvelleQuestion = it.next()
         println("Quelle est la réponse à cette question (o/n) ?")
-        val reponseNouvelleQuestion = it.next()
-        if(reponseNouvelleQuestion.equals("o")) {
+        if(it.next().equals("o")) {
           Question(nouvelleQuestion, Animal(reponseAttendue), a)
         } else {
           Question(nouvelleQuestion, a, Animal(reponseAttendue))
@@ -101,7 +93,42 @@ object ChaumontGrevillot {
     }
   }
   
+  /* Question 5 */
+  
+  def fichierToABanimal(nomf: String): ABanimal = {    
+    def aux(it: Iterator[String]): ABanimal = {
+      val res = it.next()
+      if(res.startsWith("q:"))
+        Question(res substring(2), aux(it), aux(it))
+      else
+        Animal(res)
+    }
+    aux(Source.fromFile(nomf).getLines)
+  }
+  
+  /* Question 6 */
+  
+  def ABanimalToFichier(nomf: String, a: ABanimal): Unit = {
+    val writer = new FileWriter(new File(nomf))
+    def aux(arbre: ABanimal): Unit = arbre match {
+      case Question(q, oui, non) => {
+         writer.write("q:" + q + "\n")
+         aux(oui)
+         aux(non)
+      }
+      case Animal(nom) => writer.write(nom + "\n")
+    }
+    aux(a)
+    writer.close()
+  }
+  
+  /* Question 7 */
+  
+  
+  
   def main(args: Array[String]): Unit = {
-    jeuSimple(a, Source.stdin.getLines)
+    //jeuSimple(a, Source.stdin.getLines)
+    //jeuApprentissage(a, Source.stdin.getLines)
+    ABanimalToFichier("src/test/scala/projet_akinator/animalToFichier.txt", a)
   }
 }
