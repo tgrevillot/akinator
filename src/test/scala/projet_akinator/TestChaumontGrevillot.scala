@@ -57,11 +57,32 @@ class TestChaumontGrevillot extends FunSuite {
     assert(fichierToABanimal("src/test/scala/projet_akinator/fichierToAnimal.txt") === a)
   }
   
-  test("fichierToABanimal fichier vide (devrait lever une exception") {
-    intercept[Exception] {
-      fichierToABanimal("src/test/scala.projet_akinator/fichierToAnimalVide.txt")
+  test("fichierToABanimal fichier vide (devrait lever NoSuchElementException)") {
+    intercept[NoSuchElementException] {
+      fichierToABanimal("src/test/scala/projet_akinator/fichierToAnimalVide.txt")
     }
   }
   
+  test("fichierToABanimal fichier avec noeud vide (devrait lever NoSuchElementException)") {
+    intercept[NoSuchElementException] {
+      fichierToABanimal("src/test/scala/projet_akinator/fichierToAnimalNoeudVide.txt")
+    }    
+  }
+  
   /* Question 6 */
+  
+  test("fichierToABanimal into ABanimaltoFichier devrait reproduire l'arbre originel") {
+    ABanimalToFichier("src/test/scala/projet_akinator/animalToFichierThenFichierToAnimal.txt", a)
+    assert(fichierToABanimal("src/test/scala/projet_akinator/animalToFichierThenFichierToAnimal.txt") === a)
+  }
+  
+  /* Question 7 */
+  
+  test("jeuSimpleJNSP bonne reponse") {
+    assert(jeuSimpleJNSP(a, Iterator("o", "x", "x", "n", "n", "o", "o")) === true)
+  }
+  
+  test("jeuSimpleJNSP mauvaise reponse") {
+    assert(jeuSimpleJNSP(a, Iterator("o", "x", "x", "n", "n", "o", "n")) === false)
+  }
 }
