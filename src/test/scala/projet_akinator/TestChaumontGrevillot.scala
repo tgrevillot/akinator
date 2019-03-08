@@ -16,7 +16,7 @@ class TestChaumontGrevillot extends FunSuite {
           Animal("Chat"), Animal("Chien")));
   
   
-  /* Question 1 */
+  /* Question 1 & 2 */
   
   test("jeuSimple bonne reponse") {
     assert(jeuSimple(a, Iterator("o", "o", "o", "o")) === true)
